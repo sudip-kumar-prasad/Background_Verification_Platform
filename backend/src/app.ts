@@ -9,6 +9,7 @@ import authRoutes from './routes/auth.routes';
 import candidateRoutes from './routes/candidate.routes';
 import verificationRoutes from './routes/verification.routes';
 import mockRoutes from './routes/mock.routes';
+import reportRoutes from './routes/report.routes';
 
 dotenv.config();
 
@@ -49,6 +50,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/candidates', candidateRoutes);
 app.use('/api/verifications', verificationRoutes);
 app.use('/api/mock', mockRoutes);
+app.use('/api/reports', reportRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

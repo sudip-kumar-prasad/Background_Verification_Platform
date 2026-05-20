@@ -6,6 +6,7 @@ const API = axios.create({
     'Content-Type': 'application/json',
   },
 });
+export default API;
 
 // Automatically inject JWT token into all requests
 API.interceptors.request.use(

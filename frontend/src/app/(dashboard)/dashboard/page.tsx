@@ -21,9 +21,11 @@ import {
   User,
   CreditCard,
   MapPin,
-  X,
+  Download, X,
 } from 'lucide-react';
+import Header from '@/components/Header';
 import API from '@/services/api';
+import { downloadReport } from '@/services/api';
 
 const aadhaarRegex = /^\d{12}$/;
 const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
@@ -382,7 +384,7 @@ export default function DashboardPage() {
                         <button
                           onClick={async () => {
                             try {
-                              const blob = await API.downloadReport(candidate.id);
+                              const blob = await downloadReport(candidate.id);
                               const url = window.URL.createObjectURL(blob);
                               const a = document.createElement('a');
                               a.href = url;

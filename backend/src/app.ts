@@ -7,6 +7,8 @@ import prisma from './config/db';
 
 import authRoutes from './routes/auth.routes';
 import candidateRoutes from './routes/candidate.routes';
+import verificationRoutes from './routes/verification.routes';
+import mockRoutes from './routes/mock.routes';
 
 dotenv.config();
 
@@ -45,7 +47,8 @@ app.get('/health', async (req: Request, res: Response) => {
 // Route registration
 app.use('/api/auth', authRoutes);
 app.use('/api/candidates', candidateRoutes);
-// TODO: app.use('/api/verifications', verificationRoutes);
+app.use('/api/verifications', verificationRoutes);
+app.use('/api/mock', mockRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

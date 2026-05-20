@@ -14,7 +14,7 @@ import reportRoutes from './routes/report.routes';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5003;
 
 // Security and utility middleware
 app.use(helmet());

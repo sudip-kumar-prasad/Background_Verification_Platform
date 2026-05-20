@@ -371,13 +371,34 @@ export default function DashboardPage() {
                       {new Date(candidate.createdAt).toLocaleDateString()}
                     </td>
                     <td className="py-4 px-4 text-right">
-                      <Link
-                        href={`/candidates/${candidate.id}`}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-slate-900 bg-slate-950/40 px-3 py-1.5 text-[11px] font-semibold text-white group-hover:border-blue-500/30 group-hover:bg-blue-600/10 group-hover:text-blue-400 transition-all"
-                      >
-                        Details
-                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                      </Link>
+                      <div className="inline-flex gap-2">
+                        <Link
+                          href={`/candidates/${candidate.id}`}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-900 bg-slate-950/40 px-3 py-1.5 text-[11px] font-semibold text-white group-hover:border-blue-500/30 group-hover:bg-blue-600/10 group-hover:text-blue-400 transition-all"
+                        >
+                          Details
+                          <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                        </Link>
+                        <button
+                          onClick={async () => {
+                            try {
+                              const blob = await API.downloadReport(candidate.id);
+                              const url = window.URL.createObjectURL(blob);
+                              const a = document.createElement('a');
+                              a.href = url;
+                              a.download = `Verification_Report_${candidate.fullName.replace(/\s+/g, '_')}.pdf`;
+                              a.click();
+                              window.URL.revokeObjectURL(url);
+                            } catch (err) {
+                              console.error('Report download failed', err);
+                            }
+                          }}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-slate-900 bg-slate-950/40 px-3 py-1.5 text-[11px] font-semibold text-white hover:border-green-500/30 hover:bg-green-600/10 hover:text-green-400 transition-all"
+                        >
+                          Report
+                          <Download className="h-3 w-3" />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

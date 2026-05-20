@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5003/api',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -41,4 +41,9 @@ API.interceptors.response.use(
   }
 );
 
-export default API;
+export const downloadReport = async (candidateId: string) => {
+  const response = await API.get(`/reports/${candidateId}`, {
+    responseType: 'blob',
+  });
+  return response.data as Blob;
+};

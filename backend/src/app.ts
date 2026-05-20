@@ -5,6 +5,8 @@ import rateLimit from 'express-rate-limit';
 import dotenv from 'dotenv';
 import prisma from './config/db';
 
+import authRoutes from './routes/auth.routes';
+
 dotenv.config();
 
 const app = express();
@@ -39,8 +41,8 @@ app.get('/health', async (req: Request, res: Response) => {
   }
 });
 
-// Basic route registration placeholders
-// TODO: app.use('/api/auth', authRoutes);
+// Route registration
+app.use('/api/auth', authRoutes);
 // TODO: app.use('/api/candidates', candidateRoutes);
 // TODO: app.use('/api/verifications', verificationRoutes);
 

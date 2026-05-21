@@ -1,5 +1,5 @@
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id           String      @id @default(uuid())
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
   name         String
   email        String      @unique
   passwordHash String
@@ -18,7 +18,7 @@ model User {
 }
 
 model Candidate {
-  id               String            @id @default(uuid())
+  id               String            @id @default(auto()) @map("_id") @db.ObjectId
   fullName         String
   email            String
   phone            String
@@ -29,14 +29,14 @@ model Candidate {
   status           String            // PENDING, VERIFIED, FAILED, PARTIAL
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
-  createdById      String
+  createdById      String            @db.ObjectId
   createdBy        User              @relation(fields: [createdById], references: [id])
   verificationLogs VerificationLog[]
 }
 
 model VerificationLog {
-  id                 String    @id @default(uuid())
-  candidateId        String
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  candidateId        String    @db.ObjectId
   verificationType   String    // AADHAAR, PAN
   requestPayload     Json
   responsePayload    Json

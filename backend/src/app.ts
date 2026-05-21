@@ -13,6 +13,14 @@ import reportRoutes from './routes/report.routes';
 
 dotenv.config();
 
+// Verify DB connection on startup
+prisma
+  .$connect()
+  .then(() => console.log('✅ Connected to the database'))
+  .catch((err) => {
+    console.error('❌ Database connection failed:', err);
+    process.exit(1);
+  });
 const app = express();
 const PORT = process.env.PORT || 5003;
 

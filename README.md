@@ -94,7 +94,7 @@ docker compose up -d
    ```bash
    npx prisma migrate dev
    ```
-5. Start the development server (runs on port `5001` to avoid macOS AirPlay conflict):
+5. Start the development server (runs on port `5003` to avoid macOS AirPlay conflict):
    ```bash
    npm run dev
    ```
@@ -107,7 +107,7 @@ docker compose up -d
 2. Configure environmental settings:
    Create a `.env.local` file containing:
    ```text
-   NEXT_PUBLIC_API_URL=http://localhost:5001/api
+   NEXT_PUBLIC_API_URL=http://localhost:5003/api
    ```
 3. Install dependencies:
    ```bash

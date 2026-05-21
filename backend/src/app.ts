@@ -45,8 +45,8 @@ app.use('/api', limiter);
 // Health check endpoint
 app.get('/health', async (req: Request, res: Response) => {
   try {
-    // Check DB connection
-    await prisma.$queryRaw`SELECT 1`;
+    // Check DB connection (MongoDB-compatible ping)
+    await prisma.$runCommandRaw({ ping: 1 });
     res.status(200).json({ status: 'OK', database: 'connected' });
   } catch (error) {
     res.status(500).json({ status: 'ERROR', message: 'Database connection failed', error });

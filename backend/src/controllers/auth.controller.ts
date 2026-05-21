@@ -66,9 +66,15 @@ export const register = async (req: Request, res: Response) => {
         email: newUser.email,
       },
     });
-  } catch (error) {
-    console.error('Registration error:', error);
-    res.status(500).json({ error: 'Failed to register user' });
+  } catch (error: unknown) {
+    console.error(
+      'Registration error:',
+      error instanceof Error ? error.stack : error
+    );
+
+    res.status(500).json({
+      error: 'Failed to register user'
+    });
   }
 };
 
@@ -115,8 +121,14 @@ export const login = async (req: Request, res: Response) => {
         email: user.email,
       },
     });
-  } catch (error) {
-    console.error('Login error:', error?.stack || error);
-    res.status(500).json({ error: 'Failed to log in' });
+  } catch (error: unknown) {
+    console.error(
+      'Login error:',
+      error instanceof Error ? error.stack : error
+    );
+
+    res.status(500).json({
+      error: 'Failed to log in'
+    });
   }
 };

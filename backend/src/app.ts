@@ -10,6 +10,7 @@ import candidateRoutes from './routes/candidate.routes';
 import verificationRoutes from './routes/verification.routes';
 import mockRoutes from './routes/mock.routes';
 import reportRoutes from './routes/report.routes';
+import statsRoutes from './routes/stats.routes';
 
 dotenv.config();
 
@@ -59,10 +60,11 @@ app.use('/api/candidates', candidateRoutes);
 app.use('/api/verifications', verificationRoutes);
 app.use('/api/mock', mockRoutes);
 app.use('/api/reports', reportRoutes);
+app.use('/api/stats', statsRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.error(err.stack);
+  console.error('Login error:', err?.stack || err);
   res.status(500).json({
     error: 'Internal Server Error',
     message: err.message || 'An unexpected error occurred',
